@@ -18,13 +18,10 @@ export class Note {
 
     compareOffset = (a: Note, b: Note) => {return b.offset - a.offset;}
 
-    setPitch = (_cent: number) => {
-        
-    }
-
-    adjustPitch = (_delta_cents: number) => {
-        
-    }
+    changePitch = (_cent: number = 0, _octave: number = 0) => {
+        this.cent = _cent % 1200;
+        this.octave = _octave;
+    }   
 
 }
 

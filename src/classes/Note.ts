@@ -8,7 +8,7 @@ export class Note {
     offset: number; // angle denoting start of note [0-2π)
     duration: number; // fractional value denoting length of note [0, 1]
 
-    constructor(_isRest: boolean, _octave: number, _cent: number, _offset:number, _duration:number) {
+    constructor(_isRest: boolean = false, _octave: number, _cent: number, _offset:number, _duration:number) {
         this.isRest = _isRest;
         this.octave = _octave;
         this.offset = _offset % (2 * pi)
@@ -18,26 +18,12 @@ export class Note {
 
     compareOffset = (a: Note, b: Note) => {return b.offset - a.offset;}
 
-    changePitch = (_cent: number = 0, _octave: number = 0) => {
-        this.cent = _cent % 1200;
+    changeNote = (_isRest: boolean = this.isRest, _octave: number = this.octave, _cent: number = this.cent, _offset: number = this.offset, _duration: number = this.duration) => {
+        this.isRest = _isRest;
         this.octave = _octave;
-    }   
+        this.offset = _offset % (2 * pi);
+        this.cent = _cent % 1200;
+        this.duration = _duration % 1;
+    }
 
 }
-
-/*
-Frontend:
-    User => Tuning
-        Main pitches = 1200/EDO cents or other custom tuning divisions (ex Just Intonation)
-    User => KeySig
-    keySig => group of notes
-        ex: 
-            Tuning = 7EDO, Key = 5th note in 7EDO 
-            cent= {0, 240, 480, 720, 960}
-            Initial restriction = 7 notes in 7EDO
-            Further user can change each note by cents
-
-Backend:
-    Note => {...} (enum)
-
-*/

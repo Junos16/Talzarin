@@ -23,7 +23,7 @@ function Tuning() {
       <input
         type="number"
         value={division}
-        onChange={(e) => setDivision(e.target.value)}
+        onChange={(e:any) => setDivision(e.target.value)}
       />
       <button onClick={calculateTuningData}>Generate Tuning</button>
       <div>
